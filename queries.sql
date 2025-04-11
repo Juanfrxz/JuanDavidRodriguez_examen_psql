@@ -2,28 +2,33 @@
 
 SELECT id, nombre, stock
 FROM productos
-WHERE stock <  5;
+WHERE stock < 5;
 
 -- 2. Calcular ventas totales de un mes específico.
 
-SELECT
+
 
 -- 3. Obtener el cliente con más compras realizadas.
 
-SELECT c.id, c.nombre, COUNT(v.id) AS 
-contidad_compras
+SELECT 
+    c.id,
+    c.nombre,
+    COUNT(v.id) AS cantidad_compras
 FROM clientes c 
-JOIN ventas v ON c.id = v.id 
+JOIN ventas v ON c.id = v.id_cliente
 GROUP BY c.id, c.nombre
-ORDER BY contidad_comprar DESC LIMIT 1;
+ORDER BY cantidad_compras DESC 
+LIMIT 1;
 
 -- 4. Listar los 5 productos más vendidos.
 
-SELECT p.id_producto,p.nombre,SUM(dv.cantidad) AS
-total_vendido
-FROM producto p 
-JOIN detalle_venta dv ON p.id_producto = dv.id_producto
-GROUP BY p.id_producto,p.nombre 
+SELECT 
+    p.id,
+    p.nombre,
+    SUM(dv.cantidad) AS total_vendido
+FROM productos p 
+JOIN detalle_venta dv ON p.id = dv.id_producto
+GROUP BY p.id, p.nombre 
 ORDER BY total_vendido DESC
 LIMIT 5;  
 
@@ -33,8 +38,11 @@ LIMIT 5;
 
 -- 6. Identificar clientes que no han comprado en los últimos 6 meses.
 
-SELECT c.id_cliente, c.nombre
+SELECT 
+    c.id,
+    c.nombre
 FROM clientes c 
-LEFT JOIN ventas v ON c.id_cliente = v.id_cliente
-AND v.fecha >= CURRENT_DATE - INTERVAL '6 meses'
-WHERE v.id_venta IS NULL;
+LEFT JOIN ventas v ON c.id = v.id_cliente
+    AND v.fecha >= CURRENT_DATE - INTERVAL '6 months'
+WHERE v.id IS NULL;
+
