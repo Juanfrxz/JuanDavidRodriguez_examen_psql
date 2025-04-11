@@ -10,7 +10,7 @@ TechZone es un sistema de gestión de ventas diseñado para una tienda de produc
 - Análisis de ventas y reportes
 
 ## Modelo Entidad-Relación
-![Modelo E-R](modelo_er.png)
+![Modelo E-R](techzone.png)
 
 ## Estructura de Archivos
 El proyecto está organizado en los siguientes archivos SQL:
